@@ -39,7 +39,13 @@ exports.handler = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: 500,
-        headers: {},
+        // something wrong with my CORS config, not being auto-added to response
+        headers: {
+          'access-control-allow-headers':
+            'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+          'access-control-allow-methods': 'OPTIONS,POST',
+          'access-control-allow-origin': '*',
+        },
         body: JSON.stringify({
           body: body,
           error,
@@ -49,7 +55,13 @@ exports.handler = (event, context, callback) => {
       console.info('extracted', extracted);
       callback(null, {
         statusCode: 200,
-        headers: {},
+        // something wrong with my CORS config, not being auto-added to response
+        headers: {
+          'access-control-allow-headers':
+            'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+          'access-control-allow-methods': 'OPTIONS,POST',
+          'access-control-allow-origin': '*',
+        },
         body: JSON.stringify({
           body: body,
           extracted,
