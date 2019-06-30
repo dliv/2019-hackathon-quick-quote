@@ -9,11 +9,14 @@ Test images for license and plates are [here](/test-data).
 
 Note: The deployed demo has an aggressively throttled api key.
 
-## Process
+## Services Diagram
 
-- Use [AWS Textract](https://aws.amazon.com/textract/) to detect driver's license number
-- Use [AWS Rekognition](https://aws.amazon.com/rekognition/) to detect license plate number
-- Todo: retrieve other user details (e.g. credit score) with minimal data entry
+![Services Diagram](/docs/img/services-diagram.png 'Services Diagram')
+
+See:
+
+- [AWS Textract](https://aws.amazon.com/textract/)
+- [AWS Rekognition](https://aws.amazon.com/rekognition/)
 
 ## Developing
 
