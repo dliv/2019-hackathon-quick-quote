@@ -16,19 +16,19 @@ const fetchMocker = (json: any): Window['fetch'] => {
 describe('license', () => {
   test('AL', async () => {
     const fetch = fetchMocker(alDl);
-    const word = await getWords('', 'license', fetch);
+    const word = await getWords('', 'drivers-license', fetch);
     expect(word).toBe('12345678');
   });
 
   test('CA', async () => {
     const fetch = fetchMocker(caDl);
-    const word = await getWords('', 'license', fetch);
+    const word = await getWords('', 'drivers-license', fetch);
     expect(word).toBe('N2148870');
   });
 
   test('WA', async () => {
     const fetch = fetchMocker(waDl);
-    const word = await getWords('', 'license', fetch);
+    const word = await getWords('', 'drivers-license', fetch);
     expect(word).toBe('WDLABCD456DG');
   });
 });

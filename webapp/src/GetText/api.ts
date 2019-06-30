@@ -1,6 +1,6 @@
 import last from 'lodash/last';
 
-import { Word } from './types';
+import { Word, DocType } from './types';
 
 const minLicenseLength = 8;
 const maxLicenseLength = 12;
@@ -21,7 +21,7 @@ const cleanPotentialLicenses = (m: Word): Word => ({
 
 export const getWords = async (
   imgData: string,
-  imgType: 'license' | 'plate' = 'license',
+  docType: DocType,
   fetch: Window['fetch'] = window.fetch,
 ): Promise<string | null> => {
   const resp = await fetch(endpoint, {

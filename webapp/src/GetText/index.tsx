@@ -4,10 +4,14 @@ import { Alert } from 'antd';
 import { getWords } from './api';
 import { getData } from './data-uri-utils';
 import { Wrapper } from './styles';
+import { DocType } from './types';
 
-interface IProps {}
+interface IProps {
+  docType: DocType;
+  onSubmit: (text: string | null) => void;
+}
 
-const GetText: React.SFC<IProps> = () => {
+const GetText: React.SFC<IProps> = ({ docType, onSubmit }) => {
   const [dataUri, setDataUri] = React.useState<string | null>(null);
   const [word, setWord] = React.useState<string | null>(null);
   const [error, setError] = React.useState<Error | null>(null);
@@ -40,9 +44,10 @@ const GetText: React.SFC<IProps> = () => {
               if (!data) {
                 throw new Error('no data in uri');
               }
-              const wordFromApi = await getWords(data);
+              const wordFromApi = await getWords(data, docType);
               setWord(wordFromApi);
               setIsFetching(false);
+              onSubmit(wordFromApi);
             } catch (e) {
               console.error(e);
               setError(e);

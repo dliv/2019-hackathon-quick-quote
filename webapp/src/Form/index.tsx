@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Form, Input, Button, Alert } from 'antd';
 import { FormComponentProps } from 'antd/lib/form/Form';
 
+import GetText from '../GetText';
+
 import { formItemLayout, tailFormItemLayout } from './styles';
 
 interface IProps {}
@@ -9,6 +11,7 @@ interface IProps {}
 interface IState {
   error: Error | null;
   isSubmitting: boolean;
+  isUploadingLicense: boolean;
 }
 
 interface IFormValues {
@@ -24,6 +27,7 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
     this.state = {
       error: null,
       isSubmitting: false,
+      isUploadingLicense: false,
     };
   }
 
@@ -41,8 +45,8 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
 
   render() {
     const { form } = this.props;
-    const { getFieldDecorator } = form;
-    const { error, isSubmitting } = this.state;
+    const { getFieldDecorator, setFieldsValue } = form;
+    const { error, isSubmitting, isUploadingLicense } = this.state;
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -60,6 +64,40 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
               allowClear={true}
               autoComplete="license-number"
             />,
+          )}
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          {isUploadingLicense ? (
+            <GetText
+              docType="drivers-license"
+              onSubmit={number => {
+                this.setState(
+                  {
+                    isUploadingLicense: false,
+                  },
+                  () => {
+                    if (number) {
+                      setFieldsValue({
+                        number,
+                      });
+                    }
+                  },
+                );
+              }}
+            />
+          ) : (
+            <Button
+              type="link"
+              htmlType="button"
+              disabled={isSubmitting}
+              onClick={() => {
+                this.setState({
+                  isUploadingLicense: true,
+                });
+              }}
+            >
+              Upload License
+            </Button>
           )}
         </Form.Item>
         <Form.Item label="License Plate">
