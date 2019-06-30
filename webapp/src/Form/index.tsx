@@ -12,6 +12,7 @@ interface IState {
   error: Error | null;
   isSubmitting: boolean;
   isUploadingLicense: boolean;
+  isUploadingPlate: boolean;
 }
 
 interface IFormValues {
@@ -28,6 +29,7 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
       error: null,
       isSubmitting: false,
       isUploadingLicense: false,
+      isUploadingPlate: false,
     };
   }
 
@@ -46,7 +48,7 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
   render() {
     const { form } = this.props;
     const { getFieldDecorator, setFieldsValue } = form;
-    const { error, isSubmitting, isUploadingLicense } = this.state;
+    const { error, isSubmitting, isUploadingLicense, isUploadingPlate } = this.state;
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -114,6 +116,40 @@ class MainForm extends React.Component<IProps & FormComponentProps, IState> {
               allowClear={true}
               autoComplete="license-plate"
             />,
+          )}
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          {isUploadingPlate ? (
+            <GetText
+              docType="plate"
+              onSubmit={plate => {
+                this.setState(
+                  {
+                    isUploadingPlate: false,
+                  },
+                  () => {
+                    if (plate) {
+                      setFieldsValue({
+                        plate,
+                      });
+                    }
+                  },
+                );
+              }}
+            />
+          ) : (
+            <Button
+              type="link"
+              htmlType="button"
+              disabled={isSubmitting}
+              onClick={() => {
+                this.setState({
+                  isUploadingPlate: true,
+                });
+              }}
+            >
+              Upload Vehicle Plate
+            </Button>
           )}
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
