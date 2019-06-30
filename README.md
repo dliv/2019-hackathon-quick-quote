@@ -11,7 +11,7 @@ Note: The deployed demo has an aggressively throttled api key.
 
 ## Process
 
-- Use [AWS Textract](https://aws.amazon.com/textract/) to dectect driver's license number
+- Use [AWS Textract](https://aws.amazon.com/textract/) to detect driver's license number
 - Use [AWS Rekognition](https://aws.amazon.com/rekognition/) to detect license plate number
 - Todo: retrieve other user details (e.g. credit score) with minimal data entry
 
