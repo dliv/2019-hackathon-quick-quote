@@ -1,5 +1,7 @@
 import last from 'lodash/last';
 
+import apiKey from '../api-key';
+
 import { Word, DocType } from './types';
 
 const minDriversLicenseLength = 8;
@@ -11,6 +13,17 @@ const maxPlateLength = 7;
 const endpointTextract = 'https://fp136ljut3.execute-api.us-east-1.amazonaws.com/prod/textract';
 
 const endpointRekog = 'https://fp136ljut3.execute-api.us-east-1.amazonaws.com/prod/rekognition';
+
+const request = (imgData: string): any => ({
+  method: 'POST',
+  mode: 'cors',
+  body: JSON.stringify({ img: imgData }, null, 2),
+  headers: {
+    accept: 'application/json',
+    'content-type': 'application/json',
+    'x-api-key': apiKey,
+  },
+});
 
 const wordMightBeDriversLicense = (text: string) =>
   text.length >= minDriversLicenseLength &&
@@ -36,15 +49,7 @@ export const getWordsTextract = async (
   docType: DocType,
   fetch: Window['fetch'] = window.fetch,
 ): Promise<string | null> => {
-  const resp = await fetch(endpointTextract, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify({ img: imgData }, null, 2),
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-    },
-  });
+  const resp = await fetch(endpointTextract, request(imgData));
   if (!resp.ok) {
     throw new Error(resp.statusText || resp.status.toString());
   }
@@ -65,15 +70,7 @@ export const getWordsRekog = async (
   docType: DocType,
   fetch: Window['fetch'] = window.fetch,
 ): Promise<string | null> => {
-  const resp = await fetch(endpointRekog, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify({ img: imgData }, null, 2),
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-    },
-  });
+  const resp = await fetch(endpointRekog, request(imgData));
   if (!resp.ok) {
     throw new Error(resp.statusText || resp.status.toString());
   }
