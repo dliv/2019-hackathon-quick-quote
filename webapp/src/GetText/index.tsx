@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from 'antd';
 
-import { getWords } from './api';
+import { getWordsTextract, getWordsRekog } from './api';
 import { getData } from './data-uri-utils';
 import { Wrapper } from './styles';
 import { DocType } from './types';
@@ -44,7 +44,8 @@ const GetText: React.SFC<IProps> = ({ docType, onSubmit }) => {
               if (!data) {
                 throw new Error('no data in uri');
               }
-              const wordFromApi = await getWords(data, docType);
+              const api = docType === 'drivers-license' ? getWordsTextract : getWordsRekog;
+              const wordFromApi = await api(data, docType);
               setWord(wordFromApi);
               setIsFetching(false);
               onSubmit(wordFromApi);

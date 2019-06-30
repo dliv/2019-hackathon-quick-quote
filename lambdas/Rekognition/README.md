@@ -1,0 +1,4 @@
+IAM (excessive):
+
+- CloudWatchLogsFullAccess
+- RekognitionFullAccess
