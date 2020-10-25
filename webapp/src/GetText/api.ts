@@ -10,9 +10,11 @@ const maxDriversLicenseLength = 12;
 const minPlateLength = 7;
 const maxPlateLength = 7;
 
-const endpointTextract = 'https://fp136ljut3.execute-api.us-east-1.amazonaws.com/prod/textract';
+const apiGateway = 'https://bhte985u1d.execute-api.us-east-1.amazonaws.com/prod';
 
-const endpointRekog = 'https://fp136ljut3.execute-api.us-east-1.amazonaws.com/prod/rekognition';
+const endpointTextract = `${apiGateway}/textract`;
+
+const endpointRekog = `${apiGateway}/rekognition`;
 
 const request = (imgData: string): any => ({
   method: 'POST',

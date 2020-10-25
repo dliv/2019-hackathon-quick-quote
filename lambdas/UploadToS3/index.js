@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
-const bucket = 'dliv-hackathon';
+const bucket = 'dliv-hackathon-2019';
 
 const path = (category, id, ext = 'jpg') => `uploads/${category}/${id}.${ext}`;
 

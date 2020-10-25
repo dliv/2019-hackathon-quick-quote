@@ -2,7 +2,7 @@
 
 Hackathon project to reduce data entry needed during a quote.
 
-Demo (WIP) at [https://d3sw2rxroe5co8.cloudfront.net/](https://d3sw2rxroe5co8.cloudfront.net/).
+Demo (WIP) at [https://ds4ynukh0lfe1.cloudfront.net/](https://ds4ynukh0lfe1.cloudfront.net/).
 Test images for license and plates are [here](/test-data).
 
 ![Demo Gif](/docs/img/quick-quote-OCR.gif 'Demo Gif as of 2019-06-30')
